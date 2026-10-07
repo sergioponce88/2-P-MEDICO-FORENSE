@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Segundo Parcial: Integridad Sexual y Aborto (3.º Año)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0F172A;
+      --primary-accent: #1E3A8A;
+      --highlight: #2563EB;
+      --accent: #B45309;
+      --success: #15803D;
+      --error: #DC2626;
+      --bg: #F8FAFC;
+      --card-bg: #FFFFFF;
+      --border: #CBD5E1;
+      --text: #1E293B;
+      --text-muted: #64748B;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 16px;
+    }
+
+    .container {
+      max-width: 840px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
+      color: #FFFFFF;
+      padding: 24px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+    }
+
+    header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      color: #94A3B8;
+      font-size: 0.88rem;
+    }
+
+    .badge-bar {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #F1F5F9;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    .card h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-group input {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: var(--text);
+      background-color: #F8FAFC;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--highlight);
+      background-color: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .btn {
+      width: 100%;
+      background: var(--primary-accent);
+      color: #FFFFFF;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.98rem;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn:hover { background: #1e40af; }
+
+    .q-step-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #E2E8F0;
+    }
+
+    .q-counter {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .security-tag {
+      background: #FEE2E2;
+      border: 1px solid #FCA5A5;
+      color: var(--error);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .q-text {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .opt-btn {
+      text-align: left;
+      padding: 14px;
+      background: #F8FAFC;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.92rem;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .opt-btn:hover {
+      background: #EEF2F6;
+      border-color: var(--highlight);
+    }
+
+    .penalty-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.96);
+      z-index: 9999;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      color: #FFFFFF;
+    }
+
+    .penalty-box {
+      background: #1E293B;
+      border: 3px solid #EF4444;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 520px;
+      box-shadow: 0 0 25px rgba(239, 68, 68, 0.6);
+      animation: alertGlow 1s infinite alternate;
+    }
+
+    @keyframes alertGlow {
+      from { box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
+      to { box-shadow: 0 0 30px rgba(239, 68, 68, 0.9); }
+    }
+
+    .penalty-box h2 {
+      font-family: 'Montserrat', sans-serif;
+      color: #EF4444;
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .score-banner {
+      text-align: center;
+      padding: 24px;
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .score-banner .score-num {
+      font-size: 3.2rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .feedback-item {
+      padding: 14px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      border-left: 5px solid transparent;
+      font-size: 0.88rem;
+    }
+
+    .feedback-item.correct {
+      background-color: #F0FDF4;
+      border-left-color: var(--success);
+    }
+
+    .feedback-item.incorrect {
+      background-color: #FEF2F2;
+      border-left-color: var(--error);
+    }
+
+    .feedback-item .q-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .feedback-item .explanation {
+      margin-top: 6px;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Segundo Parcial: Integridad Sexual y Aborto</h1>
+    <p>Técnicas de Investigación Médico Forense • Dr. Daniel Décima Fariñas • Cadetes de 3.º Año</p>
+    <div class="badge-bar">
+      <span class="badge">25 Preguntas Oficiales</span>
+      <span class="badge">Escala de 1 a 10</span>
+      <span class="badge">Alarma de Foco Activa</span>
+    </div>
+  </header>
+
+  <!-- PANTALLA 1: DATOS DEL CADETE -->
+  <div id="screenInit" class="card">
+    <h2>1. Registro de Datos del Cadete</h2>
+    <form id="initForm">
+      <div class="form-grid" style="margin-bottom: 20px;">
+        <div class="form-group">
+          <label for="nombre">Nombre y Apellido *</label>
+          <input type="text" id="nombre" required placeholder="Ej: Sergio E. Ponce">
+        </div>
+        <div class="form-group">
+          <label for="legajo">Número de Legajo *</label>
+          <input type="text" id="legajo" required placeholder="Ej: L-45892">
+        </div>
+        <div class="form-group">
+          <label for="curso">Curso *</label>
+          <input type="text" id="curso" required placeholder="Ej: 3.º Año 'A'">
+        </div>
+        <div class="form-group">
+          <label for="fecha">Fecha *</label>
+          <input type="date" id="fecha" required>
+        </div>
+      </div>
+
+      <div style="background: #F1F5F9; border-left: 4px solid var(--accent); padding: 12px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 20px;">
+        <strong>Protocolo Disciplinario:</strong> Esta evaluación se ejecuta con supervisión activa de pantalla completa. Si sale de la ventana, minimiza, consulta otra aplicación o pierde el foco, se activará una <strong>alarma sonora de emergencia</strong>, la pregunta actual quedará <strong>ANULADA (0 PUNTOS)</strong> y el incidente será asentado en la planilla oficial.
+      </div>
+
+      <button type="submit" class="btn">Iniciar Evaluación</button>
+    </form>
+  </div>
+
+  <!-- PANTALLA 2: PREGUNTA POR PREGUNTA -->
+  <div id="screenExam" class="card" style="display: none;">
+    <div class="q-step-bar">
+      <span class="q-counter" id="stepCounter">Pregunta 1 de 25</span>
+      <span class="security-tag">● Control Antifraude</span>
+    </div>
+    <div class="q-text" id="questionText"></div>
+    <div class="options" id="optionsContainer"></div>
+  </div>
+
+  <!-- PANTALLA 3: RESULTADOS -->
+  <div id="screenResults" class="card" style="display: none;">
+    <h2>Resultado Final del Parcial</h2>
+    <div class="score-banner">
+      <h3 style="color: #1E3A8A; font-size: 1.1rem; margin-bottom: 6px;">Nota Definitiva</h3>
+      <div class="score-num" id="scoreDisplay">0.0</div>
+      <p id="scoreDetails" style="font-size: 0.9rem; color: #475569;"></p>
+    </div>
+    <div id="feedbackContainer"></div>
+  </div>
+</div>
+
+<!-- OVERLAY DE PENALIZACIÓN CON ALARMA -->
+<div id="penaltyOverlay" class="penalty-overlay">
+  <div class="penalty-box">
+    <h2>🚨 ALERTA: PÉRDIDA DE FOCO DETECTADA</h2>
+    <p style="font-size: 0.95rem; color: #E2E8F0; margin-bottom: 18px; line-height: 1.5;">
+      Se ha detectado salida del navegador o cambio de ventana.<br>
+      La pregunta activa ha sido calificada como <strong>INCORRECTA (0 PUNTOS)</strong>.
+    </p>
+    <button id="btnContinuePenalty" class="btn" style="background: #DC2626;">Continuar Examen y Apagar Alarma</button>
+  </div>
+</div>
+
+<script>
+  // URL de tu Web App de Google Apps Script actualizada
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx-UULOLbxxZeO9qqlSmBx2TXR6RMDq91Z2TDgwq106d1FbtTxg-7W_I_YOhRbjFaTnAA/exec";
+
+  // Fecha por defecto al día de hoy
+  document.getElementById("fecha").value = new Date().toISOString().split("T")[0];
+
+  // SISTEMA DE ALARMA DE EMERGENCIA (Web Audio API)
+  let audioCtx = null;
+  let alarmInterval = null;
+  let alarmOscillator = null;
+
+  function initAudioContext() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+  }
+
+  function startAlarmSound() {
+    try {
+      initAudioContext();
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+
+      let toggle = false;
+      alarmOscillator = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+
+      alarmOscillator.type = "sawtooth";
+      gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+
+      alarmOscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      alarmOscillator.start();
+
+      // Sirena bitonal oscilante (750 Hz <-> 950 Hz)
+      alarmInterval = setInterval(() => {
+        if (!alarmOscillator) return;
+        toggle = !toggle;
+        alarmOscillator.frequency.setValueAtTime(toggle ? 950 : 750, audioCtx.currentTime);
+      }, 250);
+    } catch (e) {
+      console.warn("Audio Context error:", e);
+    }
+  }
+
+  function stopAlarmSound() {
+    if (alarmInterval) {
+      clearInterval(alarmInterval);
+      alarmInterval = null;
+    }
+    if (alarmOscillator) {
+      try {
+        alarmOscillator.stop();
+        alarmOscillator.disconnect();
+      } catch (e) {}
+      alarmOscillator = null;
+    }
+  }
+
+  // 25 Preguntas oficiales en orden textual estricto con sus claves correctas
+  const questions = [
+    {
+      id: 1,
+      q: "1. Una persona denuncia tocamientos forzados por encima de la ropa. Presenta escoriaciones en brazos y examen genital normal. ¿Cuál es la interpretación más adecuada?",
+      options: [
+        "El examen genital normal excluye un abuso sexual simple.",
+        "Las escoriaciones permiten identificar al autor del hecho.",
+        "Los hallazgos deben integrarse con otras pruebas; no confirman ni descartan por sí solos el abuso.",
+        "La ausencia de lesiones genitales obliga a investigar únicamente lesiones leves."
+      ],
+      correct: 2, // C
+      exp: "C. Las lesiones de sujeción son compatibles con distintos mecanismos y el examen normal no excluye abuso."
+    },
+    {
+      id: 2,
+      q: "2. Una persona adulta refiere un contacto sexual impuesto mediante amenazas, sin golpes ni lesiones visibles. ¿Qué dato resulta jurídicamente relevante para el artículo 119?",
+      options: [
+        "La amenaza puede impedir el consentimiento libre aunque no exista violencia física.",
+        "La falta de lesiones convierte el contacto en una conducta consentida.",
+        "La figura exige resistencia física comprobada durante el contacto.",
+        "La amenaza sólo es relevante cuando se acompaña de acceso carnal."
+      ],
+      correct: 0, // A
+      exp: "A. El artículo 119 contempla amenazas y otras formas de coacción, además de violencia física."
+    },
+    {
+      id: 3,
+      q: "3. ¿Qué correspondencia entre el artículo 119 del Código Penal y sus primeros tres párrafos es correcta?",
+      options: [
+        "Primer párrafo: acceso carnal; segundo: figura básica; tercero: sometimiento gravemente ultrajante.",
+        "Primer párrafo: figura básica; segundo: acceso carnal; tercero: sometimiento gravemente ultrajante.",
+        "Primer párrafo: sometimiento gravemente ultrajante; segundo: figura básica; tercero: acceso carnal.",
+        "Primer párrafo: figura básica; segundo: sometimiento gravemente ultrajante; tercero: acceso carnal y actos análogos previstos."
+      ],
+      correct: 3, // D
+      exp: "D. Artículo 119: primer párrafo, figura básica; segundo, sometimiento gravemente ultrajante; tercero, acceso carnal y actos análogos previstos."
+    },
+    {
+      id: 4,
+      q: "4. Una persona de 12 años manifiesta que aceptó un contacto de contenido sexual con un adulto. ¿Cuál es la afirmación correcta sobre el artículo 119?",
+      options: [
+        "La declaración de aceptación elimina la relevancia penal del contacto.",
+        "Es necesario acreditar violencia física para aplicar la figura.",
+        "La protección por edad alcanza a menores de 13 años; la aceptación expresada no excluye por sí misma el supuesto delito.",
+        "Sólo se aplica si el examen demuestra lesión genital reciente."
+      ],
+      correct: 2, // C
+      exp: "C. El primer párrafo establece una protección específica para personas menores de trece años."
+    },
+    {
+      id: 5,
+      q: "5. Se investiga un abuso cometido por un agente policial. ¿Qué circunstancia contempla expresamente el artículo 119 como agravante relacionada con esa condición?",
+      options: [
+        "Que el hecho se cometa en ocasión de sus funciones.",
+        "Que el agente tenga una determinada antigüedad laboral.",
+        "Que use uniforme, aunque el hecho sea ajeno a sus funciones.",
+        "Que la víctima conozca previamente su profesión."
+      ],
+      correct: 0, // A
+      exp: "A. La norma exige que el personal policial o de seguridad actúe en ocasión de sus funciones."
+    },
+    {
+      id: 6,
+      q: "6. Se investiga un abuso con acceso carnal y participación de dos agresores. ¿Cuál es la respuesta más adecuada?",
+      options: [
+        "La participación plural sólo modifica la investigación si hay lesiones graves.",
+        "La comisión por dos o más personas constituye una agravante prevista en el artículo 119.",
+        "La agravante requiere que todos los participantes produzcan penetración.",
+        "El número de participantes sólo tiene relevancia para el examen toxicológico."
+      ],
+      correct: 1, // B
+      exp: "B. El concurso de dos o más personas está previsto como agravante; no depende de una lesión grave."
+    },
+    {
+      id: 7,
+      q: "7. Una persona refiere acceso vaginal no consentido ocurrido 48 horas antes. No se observan desgarros. ¿Qué conclusión puede sostenerse?",
+      options: [
+        "El tiempo transcurrido vuelve innecesaria toda búsqueda de evidencia.",
+        "La ausencia de desgarros demuestra que sólo existieron tocamientos.",
+        "El examen normal prueba que el acceso fue consentido.",
+        "La ausencia de desgarros no excluye penetración y debe interpretarse según el contexto y el tiempo transcurrido."
+      ],
+      correct: 3, // D
+      exp: "D. Puede haber penetración sin lesión visible; la oportunidad del examen influye en los hallazgos."
+    },
+    {
+      id: 8,
+      q: "8. Un informe describe un himen sin lesiones. ¿Qué inferencia sería científicamente incorrecta?",
+      options: [
+        "Registrar la morfología observada como parte del examen.",
+        "Afirmar que esa observación demuestra ausencia de relaciones sexuales previas.",
+        "Señalar que el hallazgo no permite descartar un hecho denunciado.",
+        "Considerar el relato y el tiempo transcurrido al interpretar el examen."
+      ],
+      correct: 1, // B
+      exp: "B. La inspección himeneal no permite determinar científicamente la historia sexual."
+    },
+    {
+      id: 9,
+      q: "9. Un hisopado presenta un perfil de ADN compatible con el del imputado. ¿Cuál es su alcance más adecuado?",
+      options: [
+        "Demuestra necesariamente que el contacto no fue consentido.",
+        "Establece por sí solo el momento exacto del contacto.",
+        "Puede apoyar una asociación biológica, pero requiere integración con el contexto y otras pruebas.",
+        "Permite prescindir del análisis de la cadena de custodia."
+      ],
+      correct: 2, // C
+      exp: "C. Una asociación genética no determina por sí sola consentimiento, momento ni modalidad del hecho."
+    },
+    {
+      id: 10,
+      q: "10. Una persona con amnesia tras una reunion social tiene un resultado toxicológico negativo obtenido tardíamente. ¿Cómo debe interpretarse?",
+      options: [
+        "No excluye necesariamente exposición; deben considerarse ventana de detección, muestra y método utilizado.",
+        "Descarta la intervención de sustancias en todos los casos.",
+        "Demuestra que la persona administró voluntariamente la sustancia.",
+        "Confirma que el período de amnesia tiene un origen exclusivamente psicológico."
+      ],
+      correct: 0, // A
+      exp: "A. El resultado negativo tardío puede estar condicionado por eliminación de la sustancia y límites analíticos."
+    },
+    {
+      id: 11,
+      q: "11. Ante sospecha de violencia sexual facilitada por sustancias, ¿qué actuación debe priorizar el primer interviniente?",
+      options: [
+        "Esperar el examen toxicológico para decidir si corresponde atención médica.",
+        "Sugerir una sustancia específica para completar los vacíos del relato.",
+        "Obtener primero una declaración exhaustiva, aunque se demore la asistencia.",
+        "Facilitar atención clínica y coordinar muestras tempranas, registrando tiempos, síntomas y consumos conocidos."
+      ],
+      correct: 3, // D
+      exp: "D. La asistencia clínica es prioritaria y debe coordinarse con la obtención oportuna de evidencia."
+    },
+    {
+      id: 12,
+      q: "12. Se reciben dos prendas húmedas con posibles rastros biológicos. ¿Qué procedimiento es más adecuado?",
+      options: [
+        "Guardarlas juntas en una bolsa hermética para conservar la humedad.",
+        "Gestionar su secado controlado según protocolo y embalarlas individualmente con identificación y trazabilidad.",
+        "Lavarlas antes del embalaje para retirar contaminantes externos.",
+        "Colocarlas en un mismo envoltorio si pertenecen a la misma persona."
+      ],
+      correct: 1, // B
+      exp: "B. El secado controlado y embalaje individual reducen degradación y contaminación cruzada."
+    },
+    {
+      id: 13,
+      q: "13. ¿Qué artículo del Código Penal tipifica el grooming y qué conducta contempla?",
+      options: [
+        "Artículo 128: todo contacto electrónico con menores, aunque carezca de finalidad sexual delictiva.",
+        "Artículo 130: el contacto digital con menores únicamente cuando se concreta un encuentro presencial.",
+        "Artículo 131: contactar por medios tecnológicos a una persona menor de edad con el propósito de cometer un delito contra su integridad sexual.",
+        "Artículo 120: contactar por medios tecnológicos a cualquier persona con el propósito de cometer un delito sexual."
+      ],
+      correct: 2, // C
+      exp: "C. El grooming se encuentra previsto en el artículo 131. Exige contacto tecnológico con una persona menor de edad y la finalidad delictiva indicada."
+    },
+    {
+      id: 14,
+      q: "14. Un niño relata espontáneamente un posible abuso al personal policial. ¿Cuál es la actuación inicial más adecuada?",
+      options: [
+        "Repetir las preguntas con distintos agentes para comparar versiones.",
+        "Escuchar, registrar sus expresiones relevantes, atender la protección inmediata y coordinar intervención especializada.",
+        "Proponer nombres y conductas para que confirme lo ocurrido.",
+        "Confrontarlo inmediatamente con la persona señalada para verificar el relato."
+      ],
+      correct: 1, // B
+      exp: "B. La actuación inicial debe proteger y evitar preguntas sugestivas o reiteraciones innecesarias."
+    },
+    {
+      id: 15,
+      q: "15. ¿Cuál es la finalidad principal de una entrevista especializada en Cámara Gesell?",
+      options: [
+        "Determinar mediante el comportamiento si el niño dice la verdad.",
+        "Reemplazar toda prueba médica, biológica y testimonial.",
+        "Establecer automáticamente la responsabilidad penal del denunciado.",
+        "Obtener información mediante una metodología especializada, reduciendo reiteraciones y respetando garantías procesales."
+      ],
+      correct: 3, // D
+      exp: "D. Es un recurso de entrevista y protección, no un detector de verdad ni un sustituto de toda evidencia."
+    },
+    {
+      id: 16,
+      q: "16. Una persona adulta denuncia un contacto sexual impuesto y explica que quedó inmóvil por miedo. No presenta lesiones defensivas. ¿Qué criterio debe orientar la investigación?",
+      options: [
+        "La inmovilidad demuestra aceptación del contacto.",
+        "La ausencia de defensa excluye la posibilidad de amenaza.",
+        "La inmovilidad puede ser una respuesta ante amenaza; deben investigarse las condiciones del consentimiento sin exigir resistencia física.",
+        "La falta de lesiones permite concluir que el relato es falso."
+      ],
+      correct: 2, // C
+      exp: "C. La falta de resistencia no permite inferir consentimiento; deben investigarse amenaza y contexto."
+    },
+    {
+      id: 17,
+      q: "17. Desde el punto de vista clínico, ¿qué definición de aborto es correcta?",
+      options: [
+        "Interrupción del embarazo antes de la viabilidad fetal, que puede ser espontánea o inducida.",
+        "Toda expulsión fetal anterior al término, incluso si el recién nacido es viable.",
+        "Muerte del recién nacido después de la separación completa del cuerpo materno.",
+        "Interrupción del embarazo realizada necesariamente por medios ilícitos."
+      ],
+      correct: 0, // A
+      exp: "A. La definición clínica utiliza la viabilidad fetal. No determina por sí sola si una conducta es legal o punible; la noción penal no se limita automáticamente a ese umbral."
+    },
+    {
+      id: 18,
+      q: "18. ¿Qué opción identifica correctamente el artículo que sanciona a quien causa un aborto sin consentimiento de la persona gestante y su escala básica?",
+      options: [
+        "Artículo 86: prisión de tres a diez años.",
+        "Artículo 88: prisión de tres meses a un año.",
+        "Artículo 85, inciso 1: prisión de tres a diez años.",
+        "Artículo 87: prisión de seis meses a tres años."
+      ],
+      correct: 2, // C
+      exp: "C. El artículo 85, inciso 1, establece tres a diez años. La pena puede elevarse hasta quince años si el hecho es seguido de la muerte de la persona gestante."
+    },
+    {
+      id: 19,
+      q: "19. ¿Cuál es el contenido vigente del artículo 86 del Código Penal?",
+      options: [
+        "Autoriza el aborto hasta la semana 14 sólo si el embarazo proviene de una violación.",
+        "Autoriza el aborto después de la semana 14 sólo cuando existe peligro para la vida, excluyendo el riesgo para la salud.",
+        "Exige autorización judicial para toda interrupción posterior a la semana 14.",
+        "No considera delito el aborto consentido hasta la semana 14 inclusive y contempla, fuera de ese plazo, embarazo por violación o riesgo para la vida o la salud."
+      ],
+      correct: 3, // D
+      exp: "D. El artículo 86 establece el plazo y las causales indicadas. Deben cumplirse las condiciones legales de consentimiento y, para la causal violación, la declaración jurada cuando corresponda."
+    },
+    {
+      id: 20,
+      q: "20. ¿Qué combinación de número de artículo y elementos de la conducta corresponde al artículo 87 vigente?",
+      options: [
+        "Artículo 87: cualquier aborto causado por negligencia, aunque no exista violencia ni conocimiento del embarazo.",
+        "Artículo 85: violencia que causa aborto sin propósito de causarlo, si el embarazo es notorio o conocido.",
+        "Artículo 87: causar aborto con violencia, sin propósito de causarlo, cuando el embarazo es notorio o le consta al autor.",
+        "Artículo 88: causar aborto con violencia y con propósito de provocarlo."
+      ],
+      correct: 2, // C
+      exp: "C. El artículo 87 requiere violencia, ausencia de propósito de causar aborto y embarazo notorio o conocido. Su pena es de seis meses a tres años; no tipifica genéricamente la negligencia."
+    },
+    {
+      id: 21,
+      q: "21. ¿Cuál es la afirmación correcta sobre el artículo 88 después de la Ley 27.610?",
+      options: [
+        "Sigue vigente para la persona gestante que causa o consiente su aborto después de la semana 14 sin las causales del artículo 86; su tentativa no es punible.",
+        "Fue derogado y no contempla ningún supuesto de punibilidad.",
+        "Sanciona toda interrupción voluntaria, incluso dentro de la semana 14.",
+        "Sanciona únicamente al personal de salud que obstaculiza una interrupción legal."
+      ],
+      correct: 0, // A
+      exp: "A. El artículo 88 prevé tres meses a un año, permite eximir la pena cuando la conducta resulte excusable y excluye la punibilidad de la tentativa de la persona gestante."
+    },
+    {
+      id: 22,
+      q: "22. Si se acredita un homicidio doloso de un recién nacido por su progenitor, ¿qué artículo contempla específicamente la agravante por ese vínculo, sin perjuicio de otras circunstancias del caso?",
+      options: [
+        "Artículo 85, inciso 1, porque toda muerte neonatal constituye aborto.",
+        "Artículo 88, porque se trata de la muerte de un descendiente.",
+        "Artículo 87, aunque exista intención de matar al nacido vivo.",
+        "Artículo 80, inciso 1, que incluye el homicidio del descendiente."
+      ],
+      correct: 3, // D
+      exp: "D. El vínculo con el descendiente está comprendido en el artículo 80, inciso 1. La calificación requiere acreditar sus elementos; no toda muerte neonatal es homicidio ni toda muerte violenta activa esa agravante."
+    },
+    {
+      id: 23,
+      q: "23. ¿Qué relación entre la Ley 27.610 y el Código Penal identifica correctamente el derecho a la interrupción voluntaria del embarazo por plazo?",
+      options: [
+        "Artículo 4 de la Ley 27.610 y artículo 88 del Código Penal: hasta la semana 16 inclusive.",
+        "Artículo 4 de la Ley 27.610 y artículo 86 del Código Penal: hasta la semana 14 inclusive.",
+        "Artículo 5 de la Ley 27.610 y artículo 87 del Código Penal: hasta la semana 20 inclusive.",
+        "Artículo 4 de la Ley 27.610 y artículo 85 bis del Código Penal: sólo cuando el embarazo proviene de violación."
+      ],
+      correct: 1, // B
+      exp: "B. El artículo 4 de la Ley 27.610 reconoce el derecho hasta la semana 14 inclusive; el artículo 86 del Código Penal establece que el aborto consentido dentro de ese plazo no es delito."
+    },
+    {
+      id: 24,
+      q: "24. ¿Qué fundamento y procedimiento caracterizan la prueba de Galeno o docimasia pulmonar hidrostática?",
+      options: [
+        "Evalúa aire en estómago e intestino mediante su inmersión, como prueba específica de respiración pulmonar.",
+        "Mide la longitud del cordón umbilical para establecer la duración de la vida extrauterina.",
+        "Examina la flotación de pulmones o fragmentos en agua, relacionada con la disminución de densidad por su aireación.",
+        "Busca hemorragias intracraneales que confirman necesariamente nacimiento con vida."
+      ],
+      correct: 2, // C
+      exp: "C. La prueba estudia flotación y densidad del tejido pulmonar. La aireación puede favorecer la flotación; no mide duración de supervivencia ni demuestra por sí sola respiración espontánea."
+    },
+    {
+      id: 25,
+      q: "25. En un cadáver neonatal con putrefacción, los fragmentos pulmonares flotan durante la prueba de Galeno. ¿Cuál es la interpretación más adecuada?",
+      options: [
+        "El resultado confirma respiración espontánea y permite concluir homicidio.",
+        "La flotación demuestra necesariamente ventilación realizada en vida.",
+        "La putrefacción produce únicamente falsos negativos, por lo que no modifica esta interpretación.",
+        "Los gases de putrefacción pueden producir flotación sin respiración; el resultado requiere integración con autopsia, histología y demás antecedentes."
+      ],
+      correct: 3, // D
+      exp: "D. La putrefacción puede dar falsos positivos. También la ventilación artificial puede airear pulmones sin respiración espontánea. Una prueba negativa tampoco excluye por sí sola nacimiento con vida."
+    }
+  ];
+
+  let currentIndex = 0;
+  let scorePoints = 0;
+  let violationsCount = 0;
+  let feedbackData = [];
+  let userData = {};
+  let examActive = false;
+  let penaltyTriggered = false;
+
+  const screenInit = document.getElementById("screenInit");
+  const screenExam = document.getElementById("screenExam");
+  const screenResults = document.getElementById("screenResults");
+  const penaltyOverlay = document.getElementById("penaltyOverlay");
+  const btnContinuePenalty = document.getElementById("btnContinuePenalty");
+
+  // Iniciar Examen y configurar Audio Context
+  document.getElementById("initForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    initAudioContext();
+
+    userData = {
+      nombre: document.getElementById("nombre").value.trim(),
+      legajo: document.getElementById("legajo").value.trim(),
+      curso: document.getElementById("curso").value.trim(),
+      fecha: document.getElementById("fecha").value
+    };
+
+    const elem = document.documentElement;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen().catch(() => {});
+    } else if (elem.webkitRequestFullscreen) {
+      elem.webkitRequestFullscreen();
+    }
+
+    screenInit.style.display = "none";
+    screenExam.style.display = "block";
+    examActive = true;
+    renderQuestion(currentIndex);
+  });
+
+  function renderQuestion(index) {
+    if (index >= questions.length) {
+      finishExam();
+      return;
+    }
+
+    penaltyTriggered = false;
+    const q = questions[index];
+    document.getElementById("stepCounter").textContent = `Pregunta ${index + 1} de ${questions.length}`;
+    document.getElementById("questionText").textContent = q.q;
+
+    const optContainer = document.getElementById("optionsContainer");
+    optContainer.innerHTML = "";
+
+    q.options.forEach((opt, optIdx) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "opt-btn";
+      btn.innerHTML = `<strong>${String.fromCharCode(65 + optIdx)}.</strong> ${opt}`;
+      btn.onclick = () => submitAnswer(optIdx, false);
+      optContainer.appendChild(btn);
+    });
+  }
+
+  function submitAnswer(chosenIdx, isPenalty = false) {
+    if (!examActive) return;
+
+    const q = questions[currentIndex];
+    const isCorrect = !isPenalty && (chosenIdx === q.correct);
+
+    if (isCorrect) scorePoints++;
+
+    feedbackData.push({
+      num: q.id,
+      question: q.q,
+      isCorrect: isCorrect,
+      userAnswer: isPenalty ? "ANULADA POR PÉRDIDA DE FOCO / SALIDA" : q.options[chosenIdx],
+      correctAnswer: q.options[q.correct],
+      exp: q.exp
+    });
+
+    currentIndex++;
+    renderQuestion(currentIndex);
+  }
+
+  // DISPARADOR DE ALARMA Y DETECCIÓN DE PÉRDIDA DE FOCO
+  function handleViolation() {
+    if (!examActive || penaltyTriggered || currentIndex >= questions.length) return;
+
+    penaltyTriggered = true;
+    violationsCount++;
+    penaltyOverlay.style.display = "flex";
+    startAlarmSound();
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && examActive) {
+      handleViolation();
+    }
+  });
+
+  window.addEventListener("blur", () => {
+    if (examActive) {
+      handleViolation();
+    }
+  });
+
+  btnContinuePenalty.onclick = () => {
+    stopAlarmSound();
+    penaltyOverlay.style.display = "none";
+
+    if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    }
+
+    submitAnswer(-1, true);
+  };
+
+  async function finishExam() {
+    examActive = false;
+    stopAlarmSound();
+    screenExam.style.display = "none";
+    screenResults.style.display = "block";
+
+    if (document.fullscreenElement && document.exitFullscreen) {
+      document.exitFullscreen().catch(() => {});
+    }
+
+    // Escala del 1 al 10 (base 1 punto, hasta 10 con 25/25)
+    const finalScore = Number((1 + (scorePoints / questions.length) * 9).toFixed(1));
+
+    document.getElementById("scoreDisplay").textContent = finalScore.toFixed(1);
+    document.getElementById("scoreDetails").textContent = `Aciertos: ${scorePoints} de ${questions.length} (${Math.round((scorePoints / questions.length) * 100)}%) • Salidas sancionadas: ${violationsCount}`;
+
+    const fbContainer = document.getElementById("feedbackContainer");
+    fbContainer.innerHTML = feedbackData.map(item => `
+      <div class="feedback-item ${item.isCorrect ? 'correct' : 'incorrect'}">
+        <div class="q-title">${item.question}</div>
+        <div><strong>Respuesta del cadete:</strong> ${item.userAnswer} ${item.isCorrect ? '✅' : '❌'}</div>
+        ${!item.isCorrect ? `<div style="color: var(--success); margin-top: 2px;"><strong>Respuesta correcta:</strong> ${item.correctAnswer}</div>` : ''}
+        <div class="explanation"><strong>Justificación forense:</strong> ${item.exp}</div>
+      </div>
+    `).join("");
+
+    // Enviar a Google Sheets
+    const payload = {
+      fecha: userData.fecha + " " + new Date().toLocaleTimeString("es-AR", { timeZone: "America/Argentina/Tucuman" }),
+      nombre: userData.nombre,
+      jerarquia: "Cadete 3.º Año",
+      dni: userData.legajo,     // Se ubica en columna D (N° Legajo)
+      destino: userData.curso,   // Se ubica en columna E (Curso)
+      aciertos: scorePoints + " / 25",
+      nota: finalScore,
+      tiempo: violationsCount > 0 ? `Finalizado (${violationsCount} salidas sancionadas)` : "Finalizado (Sin infracciones)"
+    };
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+    } catch (err) {
+      console.warn("Demora en sincronización:", err);
+    }
+  }
+</script>
+
+</body>
+</html>
